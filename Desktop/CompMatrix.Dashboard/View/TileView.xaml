@@ -1,0 +1,101 @@
+﻿<UserControl x:Class="CompMatrix.Dashboard.View.TileView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:controls="clr-namespace:CompMatrix.Dashboard.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/CompMatrix.Dashboard;component/Themes/ModernStyle.xaml" />
+                <ResourceDictionary Source="/CompMatrix.Dashboard;component/Themes/Buttons.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <DataTemplate x:Key="LibraryItemTemplate">
+                <Button Style="{StaticResource NoChromeButton}">
+                    <Grid Margin="5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Rectangle Width="50" Height="50" Stretch="Uniform" Fill="Orange" />
+
+                        <StackPanel Grid.Column="1" VerticalAlignment="Top" Margin="5,0,5,5">
+                            <TextBlock Style="{StaticResource NormalTextStyle}" TextWrapping="Wrap"
+                               Text="{Binding Name}"/>
+
+                            <TextBlock Style="{StaticResource ContentTextStyle}" TextWrapping="Wrap"
+                               Text="{Binding ShortDescription}"/>
+                        </StackPanel>
+                    </Grid>
+                </Button>
+            </DataTemplate>
+            <DataTemplate x:Key="NewsItemTemplate">
+                <Button Style="{StaticResource NoChromeButton}">
+                    <StackPanel VerticalAlignment="Top" Margin="5">
+                        <TextBlock Style="{StaticResource NormalTextStyle}" TextWrapping="Wrap"
+                               Text="{Binding Name}"/>
+
+                        <TextBlock Style="{StaticResource ContentTextStyle}" TextWrapping="Wrap"
+                               Text="{Binding Description}"/>
+                    </StackPanel>
+                </Button>
+            </DataTemplate>
+            <DataTemplate x:Key="FooterTemplate">
+                <Button Style="{StaticResource NoChromeButton}">
+                    <TextBlock Text="..." Style="{StaticResource HeaderTextStyle}" />
+                </Button>
+            </DataTemplate>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <!-- Testing Hub and HubSection controls -->
+        <controls:Hub x:Name="hub1" Header="Trace 800">
+            <controls:HubSection Header="Projects" MaxWidth="500">
+                <ItemsControl ItemsSource="{Binding ProjectList}" />
+            </controls:HubSection>
+            <controls:HubSection Header="Libraries" MaxWidth="350">
+                <controls:ClippedItemsControl ItemsSource="{Binding LibrariesList}" ItemTemplate="{StaticResource LibraryItemTemplate}" FooterTemplate="{StaticResource FooterTemplate}" />
+            </controls:HubSection>
+            <controls:HubSection Header="News &amp; Updates" MaxWidth="350">
+                <controls:ClippedItemsControl ItemsSource="{Binding NewsList}" ItemTemplate="{StaticResource NewsItemTemplate}" FooterTemplate="{StaticResource FooterTemplate}" />
+            </controls:HubSection>
+        </controls:Hub>
+
+        <controls:Hub Grid.Row="1">
+            <ItemsControl x:Name="hub2">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <controls:HubSection Header="{Binding Name}">
+                            <ItemsControl ItemsSource="{Binding Items}" ItemsPanel="{StaticResource WrapPanelTemplate}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Button Style="{StaticResource NoChromeButton}" Margin="0,0,10,10"
+                                            HorizontalContentAlignment="Stretch">
+                                            <StackPanel Margin="0,0,10,10" Orientation="Horizontal">
+                                                <Border Background="{StaticResource LibraryPrimaryBrush}" Width="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+                                                <StackPanel Margin="20,0,0,0" VerticalAlignment="Top">
+                                                    <TextBlock Text="{Binding Name}" FontSize="18" />
+                                                </StackPanel>
+                                            </StackPanel>
+                                        </Button>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </controls:HubSection>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </controls:Hub>
+    </Grid>
+</UserControl>

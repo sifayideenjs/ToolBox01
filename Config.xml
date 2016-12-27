@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Configs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <Settings>
+    <UploadKey>1B8C4B07-A237-47A3-AB3C-9FE80F7E77A9</UploadKey>
+  </Settings>
+  <Hub>
+    <HubSections>
+      <HubSection>
+        <Name>Tools</Name>
+        <Tiles>
+          <Tile>
+            <Name>Comp Matrix</Name>
+            <View>SearchView</View>
+            <Type>Excel</Type>
+            <Url>CompMatrix2016</Url>
+	    <ShortDescription>Search with 2016 Comp Matrix excel file</ShortDescription>
+          </Tile>
+          <Tile>
+            <Name>Building Details</Name>
+            <View>BuildingDetailView</View>
+            <Type>Excel</Type>
+            <Url>BuildingDetail</Url>
+	    <ShortDescription>Search with Building Detail excel file</ShortDescription>
+          </Tile>
+          <Tile>
+            <Name>Salary Calculator</Name>
+            <View>Tool01View</View>
+            <Type>Tool</Type>
+            <ShortDescription>Calculate salary adjustment percentage</ShortDescription>
+          </Tile>
+        </Tiles>
+      </HubSection>
+      <HubSection>
+        <Name>Shortcuts</Name>
+        <Tiles>
+          <Tile>
+            <Name>Notepad</Name>
+            <Type>Shortcut</Type>
+            <Url>notepad.exe</Url>
+            <ShortDescription>Take some notes</ShortDescription>
+          </Tile>
+          <Tile>
+            <Name>MS Paint</Name>
+            <Type>Shortcut</Type>
+            <Url>mspaint.exe</Url>
+            <ShortDescription>Capture screen shots</ShortDescription>
+          </Tile>
+          <Tile>
+            <Name>Calc</Name>
+            <Type>Shortcut</Type>
+            <Url>calc.exe</Url>
+            <ShortDescription>Perform some calculations</ShortDescription>
+          </Tile>
+        </Tiles>
+      </HubSection>
+      <HubSection>
+        <Name>Bookmarks</Name>
+        <Tiles>
+          <Tile>
+            <Name>Microsoft</Name>
+            <Type>Web</Type>
+            <Url>www.bing.com</Url>
+            <ShortDescription>www.bing.com</ShortDescription>
+          </Tile>
+          <Tile>
+            <Name>Google</Name>
+            <Type>Web</Type>
+            <Url>www.google.com</Url>
+            <ShortDescription>www.google.com</ShortDescription>
+          </Tile>
+          <Tile>
+            <Name>Twitter</Name>
+            <Type>Web</Type>
+            <Url>www.twitter.com</Url>
+            <ShortDescription>www.twitter.com</ShortDescription>
+          </Tile>
+        </Tiles>
+      </HubSection>
+      <HubSection>
+        <Name>News &amp; Updates</Name>
+        <Tiles>
+          <Tile>
+            <Name>Microsoft</Name>
+            <Type>News</Type>
+            <Description>Microsoft is in the news today</Description>
+          </Tile>
+          <Tile>
+            <Name>Comp Matrix</Name>
+            <Type>News</Type>
+            <Description>Search Comp Matrix for some usefull stuff</Description>
+          </Tile>
+          <Tile>
+            <Name>Chennai</Name>
+            <Type>News</Type>
+            <Description>Chennai is again in the picture</Description>
+          </Tile>
+        </Tiles>
+      </HubSection>
+    </HubSections>
+  </Hub>
+</Configs>

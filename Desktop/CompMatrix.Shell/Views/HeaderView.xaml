@@ -1,0 +1,95 @@
+﻿<UserControl x:Class="ToolBox.Shell.Views.HeaderView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d" 
+             d:DesignHeight="100" d:DesignWidth="700">
+    <UserControl.Resources>
+        <Color x:Key="PrimaryColor">#FFF04E23</Color>
+        <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource PrimaryColor}" />
+
+        <Style x:Key="CircleButtonStyle" TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Foreground" Value="#FFFFFF" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Height" Value="35" />
+            <Setter Property="Width" Value="35" />
+            <Setter Property="Padding" Value="1" />
+            <Setter Property="Cursor" Value="Hand" />
+        </Style>
+
+        <Style x:Key="LogoButtonStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource CircleButtonStyle}">
+            <Setter Property="Width" Value="50" />
+            <Setter Property="Height" Value="50" />
+            <Setter Property="Foreground" Value="{StaticResource PrimaryBrush}" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Stretch="Uniform">
+                            <Grid x:Name="grid">
+                                <Ellipse Margin="4"
+                                 Stroke="{TemplateBinding Foreground}"
+                                 StrokeThickness="2"
+                                 VerticalAlignment="Stretch" />
+                                <!-- Arrow Icon -->
+                                <Canvas Width="48" Height="48" Clip="F1 M 0,0L 48,0L 48,48L 0,48L 0,0" 
+                                Margin="{TemplateBinding Padding}"
+                                UseLayoutRounding="False" 
+                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                                    <Path Width="25" Height="25" Canvas.Left="11" Canvas.Top="10" Stretch="Uniform" Fill="{TemplateBinding Foreground}" Data="M16.243999,6.8650064L27.917,14.707014 27.917,26.449025 4.0889997,26.449025 4.0889997,14.707014z M16.212999,0L32,10.84001 32,14.416014 16.235,3.5680037 0,14.732014 0,11.150011z" />
+                                </Canvas>
+                            </Grid>
+                        </Viewbox>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="grid" Property="Opacity" Value="1" />
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="False">
+                                <Setter TargetName="grid" Property="Opacity" Value=".8" />
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="true" />
+                            <Trigger Property="ToggleButton.IsChecked" Value="true" />
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="#ADADAD" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    <Grid Background="{DynamicResource HeaderBackground}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Orientation="Horizontal">
+            <Border BorderThickness="0,0,1,0" BorderBrush="White" Margin="0,5" MinWidth="70" MinHeight="75">
+                <!--<Image Source="/ToolBox.Shell;component/Images/Simplify-logo.png" Height="100" Stretch="UniformToFill" />-->
+                <TextBlock Text="toolBOX" FontSize="30" Foreground="{DynamicResource HeaderForeground}" FontWeight="Bold" FontFamily="{StaticResource DefaultFont}" Margin="20" VerticalAlignment="Center"/>
+            </Border>
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="10">
+                <!--<Border Background="{x:Null}">
+                    <Path Data="M6.8999939,19.300018L26.199982,19.300018 26.199982,22 6.8999939,22z M16.600006,5.6000061C18.699982,13.200012,29.699982,9.8000183,29.699982,9.8000183L26.199982,17.600006 6.8999939,17.600006 3.3999939,9.6000061C15.100006,12.800018,16.600006,5.6000061,16.600006,5.6000061z M30.299988,4.8000183C31.299988,4.8000183 32,5.6000061 32,6.5 32,7.5 31.199982,8.2000122 30.299988,8.2000122 29.299988,8.2000122 28.600006,7.3999939 28.600006,6.5 28.5,5.5 29.299988,4.8000183 30.299988,4.8000183z M1.6999817,4.8000183C2.6999817,4.8000183 3.3999939,5.6000061 3.3999939,6.5 3.3999939,7.5 2.6000061,8.2000122 1.6999817,8.2000122 0.79998779,8.2000122 0,7.5 0,6.5 0,5.5 0.79998779,4.8000183 1.6999817,4.8000183z M16.5,0C17.5,0 18.199982,0.80001831 18.199982,1.7000122 18.199982,2.7000122 17.399994,3.3999939 16.5,3.3999939 15.5,3.3999939 14.799988,2.6000061 14.799988,1.7000122 14.799988,0.80001831 15.600006,0 16.5,0z" Stretch="Uniform" Fill="#FFFFFFFF" Width="34" Height="34" Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5">
+                        <Path.RenderTransform>
+                            <TransformGroup>
+                                <TransformGroup.Children>
+                                    <RotateTransform Angle="0" />
+                                    <ScaleTransform ScaleX="1" ScaleY="1" />
+                                </TransformGroup.Children>
+                            </TransformGroup>
+                        </Path.RenderTransform>
+                    </Path>
+                </Border>-->
+                <!--<TextBlock Text="Intelligent Search" Margin="10,10,0,0" FontSize="16" Foreground="{DynamicResource HeaderForeground}" FontWeight="Bold"/>-->
+                <TextBlock Text="one STOP for all TOOLS" Margin="10,0,0,1" TextWrapping="Wrap" Foreground="WhiteSmoke" MaxWidth="500" FontSize="16" VerticalAlignment="Bottom"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</UserControl>
