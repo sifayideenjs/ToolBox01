@@ -1,0 +1,34 @@
+﻿<UserControl x:Name="BackboneBrowseFolder"
+             x:Class="Backbone.Common.UI.Controls.BackboneBrowseFolderControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Backbone.Common.UI.Controls"
+             xmlns:viewModel="clr-namespace:Backbone.Common.ViewModel;assembly=Backbone.Common"
+             xmlns:converter="clr-namespace:Backbone.Common.UI.Converters"
+             xmlns:System="clr-namespace:System;assembly=mscorlib"
+             mc:Ignorable="d" 
+             d:DesignHeight="33" d:DesignWidth="350">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <BooleanToVisibilityConverter x:Key="BoolToVisConverter"/>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Backbone.Common.UI;component/Themes/ModernStyle.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="2"></ColumnDefinition>
+            <ColumnDefinition Width="auto"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <TextBox Name="folderPathTextBox" Grid.Column="0" Grid.Row="1" Text="{Binding Path=BackboneBrowseFolderViewModel.Value, ElementName=BackboneBrowseFolder}" Style="{StaticResource TextBoxStyle}"/>
+        <Button Name="folderBrowseButton" Grid.Column="2" Grid.Row="1" Content="..." Width="33" Command="{Binding Path=BackboneBrowseFolderViewModel.BrowseCommand, ElementName=BackboneBrowseFolder}"/>
+    </Grid>
+</UserControl>

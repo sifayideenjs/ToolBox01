@@ -1,0 +1,31 @@
+﻿<UserControl x:Name="BackboneDouble"
+             x:Class="Backbone.Common.UI.Controls.BackboneDoubleControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:viewModel="clr-namespace:Backbone.Common.ViewModel;assembly=Backbone.Common"
+             xmlns:converter="clr-namespace:Backbone.Common.UI.Converters"
+             mc:Ignorable="d" d:DesignWidth="100" d:DesignHeight="32">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <BooleanToVisibilityConverter x:Key="BoolToVisConverter"/>
+            
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Backbone.Common.UI;component/Themes/ModernStyle.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            
+        </ResourceDictionary>
+    </UserControl.Resources>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="auto"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <TextBox Name="doubleTextBox" Grid.Column="0" Grid.Row="1" Text="{Binding Path=BackboneDoubleViewModel.Value, ElementName=BackboneDouble}" Style="{StaticResource TextBoxStyle}"/>
+    </Grid>
+</UserControl>

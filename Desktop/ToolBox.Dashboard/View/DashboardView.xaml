@@ -1,0 +1,177 @@
+﻿<UserControl x:Class="ToolBox.Dashboard.View.DashboardView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:controls="clr-namespace:ToolBox.Common.Controls;assembly=ToolBox.Common"
+             xmlns:helper="clr-namespace:ToolBox.Dashboard.XamlHelper"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/ToolBox.Common;component/Themes/ModernStyle.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/ToolBox.Common;component/Themes/Buttons.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/ToolBox.Common;component/Themes/Hub.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/ToolBox.Common;component/Themes/Icons.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/ToolBox.Common;component/Themes/ItemsControl.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <DataTemplate x:Key="COEItemTemplate">
+                <controls:Tile 
+                        Style="{StaticResource PathTileStyle}"
+                        Background="#E8E4D9"
+                        Margin="0,0,10,10"
+                        Text="{Binding Name}"
+                        Command="{Binding ElementName=mainHub, Path=DataContext.SelectCommand}"
+                        CommandParameter="{Binding}">
+                    <Viewbox Margin="25">
+                        <Path Style="{Binding IconStyle}" />
+                    </Viewbox>
+                </controls:Tile>
+            </DataTemplate>
+            <DataTemplate x:Key="FavouriteItemTemplate">
+                <Button Style="{StaticResource NoChromeButton}"
+                        HorizontalContentAlignment="Stretch"
+                        Command="{Binding ElementName=mainHub, Path=DataContext.SelectCommand}"
+                        CommandParameter="{Binding}">
+                    <Grid Margin="5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Rectangle Width="50" Height="50" Stretch="Uniform" Fill="Orange" />
+                        <StackPanel Grid.Column="1" VerticalAlignment="Top" Margin="5,0,5,5">
+                            <TextBlock Style="{StaticResource NormalTextStyle02}" TextWrapping="Wrap" Text="{Binding Name}"/>
+                            <TextBlock Style="{StaticResource ContentTextStyle02}" TextWrapping="Wrap" Text="{Binding ShortDescription}"/>
+                        </StackPanel>
+                    </Grid>
+                </Button>
+            </DataTemplate>
+            <DataTemplate x:Key="NewsItemTemplate">
+                <Button Style="{StaticResource NoChromeButton}"
+                        HorizontalContentAlignment="Stretch"
+                        Command="{Binding ElementName=mainHub, Path=DataContext.SelectCommand}"
+                        CommandParameter="{Binding}">
+                    <Grid Margin="5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="35" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <controls:CircleButton Grid.Row="1" Margin="0 0 5 0" IconStyle="{StaticResource Icon_Favorite}" />
+                        <StackPanel Grid.Column="1" VerticalAlignment="Top" Margin="5,0,5,5">
+                            <TextBlock Style="{StaticResource NormalTextStyle02}" TextWrapping="Wrap" Text="{Binding Name}"/>
+                            <TextBlock Style="{StaticResource ContentTextStyle02}" TextWrapping="Wrap" Text="{Binding Description}"/>
+                        </StackPanel>
+                    </Grid>
+                </Button>
+            </DataTemplate>
+            <DataTemplate x:Key="FooterTemplate">
+                <Button Style="{StaticResource NoChromeButton}">
+                    <TextBlock Text="..." Style="{StaticResource HeaderTextStyle}" />
+                </Button>
+            </DataTemplate>
+
+            <helper:ControlDataTemplateSelector x:Key="templateSelector"
+                                                COEItemTemplate="{StaticResource COEItemTemplate}"
+                                                FavouriteItemTemplate="{StaticResource FavouriteItemTemplate}"
+                                                NewsItemTemplate ="{StaticResource NewsItemTemplate}"/>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <controls:Hub x:Name="mainHub" Margin="20 12 12 12">
+            <controls:HubSection Header="COE's" Width="auto">
+                <ItemsControl x:Name="CompMatrixPanel"
+                ItemsSource="{Binding CenterOfExcellenceList}"
+                ItemsPanel="{StaticResource WrapPanelTemplate}"
+                ItemTemplateSelector="{StaticResource templateSelector}"
+                IsTabStop="False"/>
+            </controls:HubSection>
+        </controls:Hub>
+        
+        <!--<ItemsControl x:Name="mainHub" ItemsSource="{Binding Hub.HubSections}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <controls:HubSection Header="{Binding Name}">
+                            <ItemsControl ItemsSource="{Binding Tiles}" ItemsPanel="{StaticResource WrapPanelTemplate}" ItemTemplateSelector="{StaticResource templateSelector}"/>
+                        </controls:HubSection>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </controls:Hub>-->
+        
+        <!--<controls:Hub x:Name="hub1">
+            <controls:HubSection Header="Search Excel" MaxWidth="600">
+                <ItemsControl x:Name="CompMatrixPanel"
+                ItemsSource="{Binding ProjectList}"
+                ItemsPanel="{StaticResource WrapPanelTemplate}"
+                ItemTemplate="{StaticResource CompMatrixTemplate}"
+                IsTabStop="False"/>
+            </controls:HubSection>
+            <controls:HubSection Header="Tools" MaxWidth="350">
+                <controls:ClippedItemsControl
+                    ItemsSource="{Binding LibrariesList}"
+                    ItemsPanel="{StaticResource WrapPanelTemplate}"
+                    ItemTemplate="{StaticResource ToolsItemTemplate}"/>
+            </controls:HubSection>
+            <controls:HubSection Header="News &amp; Updates" MaxWidth="350">
+                <controls:ClippedItemsControl
+                    ItemsSource="{Binding NewsList}"
+                    ItemsPanel="{StaticResource WrapPanelTemplate}"
+                    ItemTemplate="{StaticResource NewsItemTemplate}"/>
+            </controls:HubSection>
+        </controls:Hub>-->
+        
+        <!--<DockPanel>
+        <controls:Hub>
+            <controls:HubSection x:Name="AllThemesPanel" Header="All Themes" MaxWidth="450">
+                <controls:Tile 
+                        Style="{StaticResource ContentTileStyle}"
+                        Background="#E8E4D9"
+                        ContentVisible="Visible"
+                        VerticalAlignment="Top"
+                        >
+                    <Border VerticalAlignment="Bottom" Background="Black" Opacity="0.5">
+                        <TextBlock TextWrapping="Wrap" Margin="10,5" Text="Themes" Foreground="White" FontSize="14"/>
+                    </Border>
+                </controls:Tile>
+            </controls:HubSection>
+        </controls:Hub>
+    </DockPanel>-->
+        
+        <!--<controls:Hub Grid.Row="1">
+            <ItemsControl x:Name="hub2" ItemsSource="{Binding ProjectList}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <controls:HubSection Header="{Binding Name}">
+                            <ItemsControl ItemsSource="{Binding Items}" ItemsPanel="{StaticResource WrapPanelTemplate}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Button Style="{StaticResource NoChromeButton}" Margin="0,0,10,10"
+                                            HorizontalContentAlignment="Stretch">
+                                            <StackPanel Margin="0,0,10,10" Orientation="Horizontal">
+                                                <Border Background="{StaticResource LibraryPrimaryBrush}" Width="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+                                                <StackPanel Margin="20,0,0,0" VerticalAlignment="Top">
+                                                    <TextBlock Text="{Binding Name}" FontSize="18" />
+                                                </StackPanel>
+                                            </StackPanel>
+                                        </Button>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </controls:HubSection>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </controls:Hub>-->
+    </Grid>
+</UserControl>

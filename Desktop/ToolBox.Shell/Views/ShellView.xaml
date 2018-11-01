@@ -1,0 +1,58 @@
+﻿<Window x:Class="ToolBox.Shell.Views.ShellView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:regions="http://www.codeplex.com/CompositeWPF"
+        xmlns:views="clr-namespace:ToolBox.Shell.Views"
+        Background="{StaticResource MainWindowBackground}"
+        WindowState="Maximized"
+        Title="toolBOX" Height="600" Width="900">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/ToolBox.Common;component/Themes/Buttons.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/ToolBox.Common;component/Themes/Icons.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="0"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
+
+        <views:HeaderView Grid.Row="0" Grid.ColumnSpan="2"/>
+        <ContentControl x:Name="MenuRegion" Grid.Row="1" Grid.Column="1"
+                        regions:RegionManager.RegionName="MenuRegion"
+                        VerticalContentAlignment="Stretch"
+                        HorizontalContentAlignment="Stretch" />
+        <ContentControl x:Name="MainRegion" Grid.Row="1" Grid.Column="0"
+                        regions:RegionManager.RegionName="MainRegion"
+                        VerticalContentAlignment="Stretch"
+                        HorizontalContentAlignment="Stretch" />
+        <DockPanel x:Name="AppBar" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
+            <Border x:Name="AppBarSelector" DockPanel.Dock="Bottom" HorizontalAlignment="Stretch" Background="Black" MouseLeftButtonDown="AppBarOpen">
+                <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                    <Ellipse Fill="White" Height="5" Width="5" Margin="2,5" />
+                    <Ellipse Fill="White" Height="5" Width="5" Margin="2,5" />
+                    <Ellipse Fill="White" Height="5" Width="5" Margin="2,5,10,5" />
+                </StackPanel>
+            </Border>
+            <StackPanel x:Name="AppBarContent" Background="Black" Orientation="Horizontal" Visibility="Collapsed">
+                <Button Style="{StaticResource NoChromeButton}" Click="AppBarClose">
+                    <ContentControl MaxHeight="25" Margin="10" Template="{DynamicResource ResourceKey=DownArrow}" IsTabStop="False"/>
+                </Button>
+                <ContentControl x:Name="AppBarRegion" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+                                regions:RegionManager.RegionName="AppBarRegion" 
+                                VerticalContentAlignment="Stretch"
+                                HorizontalContentAlignment="Stretch"
+                                IsTabStop="False"/>
+            </StackPanel>
+        </DockPanel>
+    </Grid>
+</Window>

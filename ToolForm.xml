@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<BackboneForm>
+  <FormInformation>
+    <Name>DG</Name>
+    <Category>IO</Category>
+  </FormInformation>
+  <BackboneProperties>
+    <BackboneProperty Name="firstName" ChildName="String" DisplayName="Name" ParameterName="FIRSTNAME" DisplayIndex="0" Required="true" IsEditable="true" FieldVisibility="0" PropertyType="STRING">
+      <String Value="Default String"/>
+    </BackboneProperty>
+    <BackboneProperty Name="age" ChildName="Double" DisplayName="Age" ParameterName="AGE" DisplayIndex="1" Required="true" IsEditable="true" FieldVisibility="0" PropertyType="DOUBLE">
+      <Double Value="5.5"/>
+    </BackboneProperty>
+    <BackboneProperty Name="profilePic" ChildName="FileDialog" DisplayName="Profile Picture" ParameterName="PROFILEPIC" DisplayIndex="2" Required="true" IsEditable="true" FieldVisibility="0" PropertyType="BROWSEFILE">
+      <FileDialog Value="Default File Path" FilterName="Image File" FileExtension=".jpg"/>
+    </BackboneProperty>
+    <BackboneProperty Name="outputDirectory" ChildName="FolderDialog" DisplayName="Output Directory" ParameterName="OUTPUTDIR" DisplayIndex="3" Required="true" IsEditable="true" FieldVisibility="0" PropertyType="BROWSEFOLDER">
+      <FolderDialog Value="Default Folder Path"/>
+    </BackboneProperty>
+    <BackboneProperty Name="executeButton" ChildName="Button" DisplayName="Button" ParameterName="EXECUTE" DisplayIndex="4" Required="true" IsEditable="true" FieldVisibility="0" PropertyType="BUTTON">
+      <Button Value="Default Content"/>
+	  <Dependencies>
+		<Dependent Name="firstName"/>
+		<Dependent Name="age"/>
+		<Dependent Name="profilePic"/>
+		<Dependent Name="outputDirectory"/>
+	  </Dependencies>
+    </BackboneProperty>
+  </BackboneProperties>
+</BackboneForm>

@@ -1,0 +1,177 @@
+﻿<UserControl x:Class="ToolBox.ConsoleTool.View.ConsoleToolAppBarView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ToolBox.ConsoleTool.View"
+             xmlns:controls="clr-namespace:ToolBox.Common.Controls;assembly=ToolBox.Common"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/ToolBox.Common;component/Themes/ModernStyle.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/ToolBox.Common;component/Themes/AppBar.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/ToolBox.Common;component/Themes/Icons.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <Color x:Key="PrimaryColor">white</Color>
+            <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource PrimaryColor}" />
+
+            <Style x:Key="CircleButtonStyle" TargetType="{x:Type Button}">
+                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="Foreground" Value="#FFFFFF" />
+                <Setter Property="BorderThickness" Value="1" />
+                <Setter Property="HorizontalContentAlignment" Value="Center" />
+                <Setter Property="VerticalContentAlignment" Value="Center" />
+                <Setter Property="Height" Value="35" />
+                <Setter Property="Width" Value="35" />
+                <Setter Property="Padding" Value="1" />
+                <Setter Property="Cursor" Value="Hand" />
+            </Style>
+
+            <Style x:Key="ConfigButtonStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource CircleButtonStyle}">
+                <Setter Property="Width" Value="30" />
+                <Setter Property="Height" Value="30" />
+                <Setter Property="Foreground" Value="{StaticResource PrimaryBrush}" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Stretch="Uniform">
+                                <Grid x:Name="grid">
+                                    <Ellipse Margin="4"
+                                 Stroke="{TemplateBinding Foreground}"
+                                 StrokeThickness="2"
+                                 VerticalAlignment="Stretch" />
+                                    <!-- Arrow Icon -->
+                                    <Canvas Width="48" Height="48" Clip="F1 M 0,0L 48,0L 48,48L 0,48L 0,0" 
+                                Margin="{TemplateBinding Padding}"
+                                UseLayoutRounding="False" 
+                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                                        <Path Width="22" Height="22" Canvas.Left="13" Canvas.Top="13" Stretch="Uniform" Fill="{TemplateBinding Foreground}" Data="M5.5803752,0C7.1813383,0 8.8833761,0.6000061 10.084373,1.8009948 11.785374,3.5029907 12.285377,5.8049927 11.685397,7.9060059L24.094478,20.31601C26.096505,19.714996 28.398524,20.216003 30.099524,21.916992 31.500535,23.317993 32.101552,25.320007 31.901538,27.121002L28.998504,24.118988C27.69753,22.817993 25.496465,22.817993 24.094478,24.118988 22.693467,25.519989 22.693467,27.622009 24.094478,29.02301L26.997514,31.924988C25.195498,32.225006 23.194447,31.625 21.793437,30.123993 20.191436,28.522003 19.591456,26.119995 20.191436,24.118988L7.7823553,11.709015C5.6803512,12.309998 3.3783338,11.80899 1.6773333,10.108002 0.37629925,8.7070007 -0.224718,6.8049927 0.076309212,5.0039978L2.978307,7.9060059C4.2793407,9.2070007 6.4813823,9.2070007 7.8823928,7.9060059 9.2834034,6.605011 9.2834034,4.4030151 7.8823928,3.0020142L4.9803342,0.10000607C5.1803479,0,5.3803615,0,5.5803752,0z" />
+                                    </Canvas>
+                                </Grid>
+                            </Viewbox>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="grid" Property="Opacity" Value="1" />
+                                </Trigger>
+                                <Trigger Property="IsMouseOver" Value="False">
+                                    <Setter TargetName="grid" Property="Opacity" Value=".8" />
+                                </Trigger>
+                                <Trigger Property="IsKeyboardFocused" Value="true" />
+                                <Trigger Property="ToggleButton.IsChecked" Value="true" />
+                                <Trigger Property="IsEnabled" Value="false">
+                                    <Setter Property="Foreground" Value="#ADADAD" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style x:Key="ConsoleButtonStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource CircleButtonStyle}">
+                <Setter Property="Width" Value="30" />
+                <Setter Property="Height" Value="30" />
+                <Setter Property="Foreground" Value="{StaticResource PrimaryBrush}" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Stretch="Uniform">
+                                <Grid x:Name="grid">
+                                    <Ellipse Margin="4"
+                                 Stroke="{TemplateBinding Foreground}"
+                                 StrokeThickness="2"
+                                 VerticalAlignment="Stretch" />
+                                    <!-- Arrow Icon -->
+                                    <Canvas Width="48" Height="48" Clip="F1 M 0,0L 48,0L 48,48L 0,48L 0,0" 
+                                Margin="{TemplateBinding Padding}"
+                                UseLayoutRounding="False" 
+                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                                        <!--<Path Width="22" Height="22" Canvas.Left="16" Canvas.Top="13" Stretch="Uniform" Fill="{TemplateBinding Foreground}" Data="M0,0L22.652,15.996998 0,31.999996z" />-->
+                                        <TextBlock Width="22" Height="22" Canvas.Left="13" Canvas.Top="13" Text="CLI" FontWeight="Bold" FontSize="14"/>
+                                    </Canvas>
+                                </Grid>
+                            </Viewbox>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="grid" Property="Opacity" Value="1" />
+                                </Trigger>
+                                <Trigger Property="IsMouseOver" Value="False">
+                                    <Setter TargetName="grid" Property="Opacity" Value=".8" />
+                                </Trigger>
+                                <Trigger Property="IsKeyboardFocused" Value="true" />
+                                <Trigger Property="ToggleButton.IsChecked" Value="true" />
+                                <Trigger Property="IsEnabled" Value="false">
+                                    <Setter Property="Foreground" Value="#ADADAD" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style x:Key="ToolButtonStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource CircleButtonStyle}">
+                <Setter Property="Width" Value="30" />
+                <Setter Property="Height" Value="30" />
+                <Setter Property="Foreground" Value="{StaticResource PrimaryBrush}" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Stretch="Uniform">
+                                <Grid x:Name="grid">
+                                    <Ellipse Margin="4"
+                                 Stroke="{TemplateBinding Foreground}"
+                                 StrokeThickness="2"
+                                 VerticalAlignment="Stretch" />
+                                    <!-- Arrow Icon -->
+                                    <Canvas Width="48" Height="48" Clip="F1 M 0,0L 48,0L 48,48L 0,48L 0,0" 
+                                Margin="{TemplateBinding Padding}"
+                                UseLayoutRounding="False" 
+                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                                        <Path Width="22" Height="22" Canvas.Left="16" Canvas.Top="13" Stretch="Uniform" Fill="{TemplateBinding Foreground}" Data="M0,0L22.652,15.996998 0,31.999996z" />
+                                    </Canvas>
+                                </Grid>
+                            </Viewbox>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="grid" Property="Opacity" Value="1" />
+                                </Trigger>
+                                <Trigger Property="IsMouseOver" Value="False">
+                                    <Setter TargetName="grid" Property="Opacity" Value=".8" />
+                                </Trigger>
+                                <Trigger Property="IsKeyboardFocused" Value="true" />
+                                <Trigger Property="ToggleButton.IsChecked" Value="true" />
+                                <Trigger Property="IsEnabled" Value="false">
+                                    <Setter Property="Foreground" Value="#ADADAD" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <controls:AppBar>
+        <Button Style="{StaticResource ConfigButtonStyle}"
+                VerticalAlignment="Center"
+                Margin="5" 
+                Command="{Binding ConsoleConfigCommand}" />
+
+        <Button Style="{StaticResource ConsoleButtonStyle}"
+                VerticalAlignment="Center"
+                Margin="5" 
+                Command="{Binding ConsoleRunCommand}" />
+
+        <Button Style="{StaticResource ToolButtonStyle}"
+                VerticalAlignment="Center"
+                Margin="5" 
+                Command="{Binding ToolRunCommand}" />
+    </controls:AppBar>
+</UserControl>
